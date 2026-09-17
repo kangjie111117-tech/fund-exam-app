@@ -1,12 +1,203 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0B5CFF"><link rel="manifest" href="./manifest.webmanifest?v=113"><link rel="apple-touch-icon" href="./icon-192.png?v=113"><title>基金从业刷题</title><style>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0B5CFF"><link rel="manifest" href="./manifest.webmanifest?v=220"><link rel="apple-touch-icon" href="./icon-192.png?v=220"><title>基金从业刷题</title><style>
 :root{--b:#0b5cff;--bg:#f5f7fb;--card:#fff;--t:#182033;--s:#7b8497;--line:#e8edf5;--ok:#169b68;--bad:#e5484d;--gold:#f59e0b}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:var(--t)}button{font:inherit}.app{max-width:600px;margin:auto;padding:calc(env(safe-area-inset-top) + 14px) 15px 100px;min-height:100vh}.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.head h1{font-size:23px;margin:0}.badge,.pill{font-size:11px;background:#eaf1ff;color:var(--b);padding:5px 9px;border-radius:99px}.hero{padding:19px;border-radius:22px;background:linear-gradient(135deg,#0759ff,#4b8cff);color:#fff;box-shadow:0 12px 28px #0b5cff20}.hero strong{display:block;font-size:28px;margin:5px 0}.bar,.pbar{height:7px;background:#ffffff35;border-radius:9px;overflow:hidden}.bar i,.pbar i{display:block;height:100%;background:white}.sec{font-size:14px;color:var(--s);margin:20px 3px 9px}.subjects,.grid2,.grid3{display:grid;grid-template-columns:1fr 1fr;gap:10px}.subject,.tile,.card{border:0;background:white;border-radius:18px;padding:15px;text-align:left;box-shadow:0 5px 20px #1720330a}.subject.active{outline:2px solid var(--b)}.subject b{font-size:17px}.subject span,.muted{display:block;color:var(--s);font-size:12px;margin-top:5px;line-height:1.45}.tile b{display:block;font-size:15px}.tile span{font-size:12px;color:var(--s);display:block;margin-top:5px}.week{width:100%;margin:8px 0}.weekTop{display:flex;justify-content:space-between;gap:10px}.week h3{font-size:16px;margin:0}.pbar{background:#edf1f7;margin-top:12px}.pbar i{background:var(--b)}.qmeta{display:flex;justify-content:space-between;color:var(--s);font-size:12px}.q{font-size:18px;font-weight:700;line-height:1.55;margin:15px 0}.opt{width:100%;padding:14px;margin:7px 0;text-align:left;border:1px solid var(--line);border-radius:14px;background:white}.opt.sel{border-color:var(--b);background:#eef4ff}.opt.ok{border-color:var(--ok);background:#effbf6}.opt.bad{border-color:var(--bad);background:#fff2f2}.analysis{padding:14px;background:#f7f9fc;border-radius:14px;margin-top:14px;line-height:1.65;font-size:14}.analysis b{color:var(--b)}.actions{display:flex;gap:8px;margin-top:12px}.actions button,.full{flex:1;border:0;border-radius:13px;padding:13px;font-weight:700}.primary{background:var(--b);color:white}.plain{background:#eef2f7;color:var(--t)}.focus.on{background:#fff7e6;color:#b76e00}.hide{display:none!important}.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(600px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:#ffffffee;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 4px calc(env(safe-area-inset-bottom) + 8px);z-index:9}.tabs button{border:0;background:none;padding:8px 2px;font-size:11px;color:var(--s)}.tabs .on{color:var(--b);font-weight:700}.empty{text-align:center;padding:36px 15px;color:var(--s)}.statrow{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}.timer{font-weight:800;color:var(--bad)}.score{font-size:30px;font-weight:800}.danger{color:var(--bad)}.oktxt{color:var(--ok)}.tags{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.tag{font-size:10px;padding:3px 7px;border-radius:99px;background:#f0f3f8;color:#657087}.tag.hot{background:#fff3df;color:#ad6900}.notice{font-size:12px;line-height:1.6;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:14px;color:var(--s);margin-top:10px}
+
+.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.quiz-top #qweek{font-weight:700;color:#667085}
+.quiz-top #timer{margin-left:10px}
+.focus-v12{border:0;background:transparent;padding:8px 4px;color:#475467;font-weight:700;cursor:pointer}
+.focus-v12.on{color:#1769ff}
+.qpos-v12{color:#7b879e;font-weight:600;margin:0 0 22px}
+#qtags{display:none!important}
+.submit-v12{margin-top:22px}
+.submit-v12 #submit{width:100%;min-height:52px}
+.nav-v12{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.navbtn-v12{border:0;background:transparent;color:#667085;font-weight:700;padding:12px 4px;cursor:pointer}
+.navbtn-v12:disabled{color:#b7beca;cursor:default}
+
+/* V1.3 mobile interaction polish */
+button,.btn,.primary,.plain,.subject,.week,.mode,.quick{
+  border-radius:14px!important;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease,opacity .12s ease;
+}
+button:active,.btn:active,.primary:active,.plain:active,.subject:active,.week:active,.mode:active,.quick:active{
+  transform:scale(.98);
+}
+#submit{border-radius:16px!important}
+.navbtn-v12{border-radius:12px!important;padding:10px 14px!important}
+.focus-v12{border-radius:12px!important}
+.focus-v12.on{background:#eef4ff!important}
+
+/* Home: clearer hierarchy and larger tap targets */
+#home .card{border-radius:20px!important}
+#home button{min-height:48px}
+#home .primary{box-shadow:0 8px 20px rgba(23,105,255,.14)}
+#home .actions{gap:10px}
+#home .actions button{flex:1}
+#home .subject,#home .week,#home .mode,#home .quick{
+  border-radius:16px!important;
+}
+#home .subject.active,#home .week.active,#home .mode.active{
+  box-shadow:0 0 0 2px rgba(23,105,255,.12);
+}
+@media(max-width:640px){
+  #home .actions{display:grid!important;grid-template-columns:1fr 1fr!important}
+  #home .actions button{width:100%!important}
+  #home .card{padding:16px!important}
+  #home button{min-height:50px}
+}
+
+.home-v14{max-width:720px;margin:0 auto}
+.home-title-v14{font-size:26px;font-weight:800;margin-top:6px}
+.home-sub-v14{color:#7b879e;margin:6px 0 22px}
+.subject-card-v14{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 6px 20px rgba(16,24,40,.05);cursor:pointer;transition:.12s}
+.subject-card-v14:active,.path-card-v14:active{transform:scale(.985)}
+.subject-num-v14{width:48px;height:48px;border-radius:15px;background:#eef4ff;color:var(--b);display:grid;place-items:center;font-weight:800}
+.subject-info-v14{flex:1;display:flex;flex-direction:column;gap:5px}
+.subject-info-v14 strong{font-size:18px}.subject-info-v14 span{font-size:13px;color:#7b879e}
+.subject-arrow-v14{font-size:28px;color:#98a2b3}
+.my-study-v14{margin-top:28px}.section-title-v14{font-weight:800;margin-bottom:10px}
+.study-grid-v14{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.study-grid-v14 button{border:1px solid var(--line);background:#fff;border-radius:16px;min-height:54px;font-weight:700;color:var(--t)}
+.legacy-hidden-v14{display:none!important}
+.subject-page-v14{max-width:720px;margin:0 auto}
+.back-v14{border:0;background:transparent;padding:10px 0;color:#667085;font-weight:700}
+.subject-head-v14 h2{margin:10px 0 4px;font-size:25px}.subject-head-v14 p{margin:0 0 22px;color:#7b879e}
+.path-card-v14{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 18px;margin:12px 0;cursor:pointer}
+.path-card-v14 div{display:flex;flex-direction:column;gap:6px}.path-card-v14 strong{font-size:18px}.path-card-v14 span{font-size:13px;color:#7b879e}.path-card-v14 b{font-size:26px;color:#98a2b3}
+.legacy-host-v14{margin-top:14px}
+@media(max-width:640px){.study-grid-v14{grid-template-columns:repeat(3,1fr)}.study-grid-v14 button{font-size:13px;padding:8px 4px}}
+
+/* ===== V1.5 Visual System ===== */
+:root{
+  --v15-bg:#f5f7fb;--v15-card:#fff;--v15-text:#172033;--v15-sub:#7c879b;
+  --v15-blue:#1769ff;--v15-blue2:#4b8cff;--v15-line:#e8edf5;--v15-soft:#eef4ff;
+  --v15-radius:20px;--v15-shadow:0 8px 28px rgba(31,52,91,.07);
+}
+body{background:var(--v15-bg)!important;color:var(--v15-text)!important}
+header{background:rgba(255,255,255,.92)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--v15-line)!important}
+.card,#home .card{border:1px solid var(--v15-line)!important;border-radius:var(--v15-radius)!important;box-shadow:var(--v15-shadow)!important;background:var(--v15-card)!important}
+button{font-family:inherit}
+.primary{background:linear-gradient(135deg,var(--v15-blue),var(--v15-blue2))!important;border-radius:15px!important;box-shadow:0 7px 18px rgba(23,105,255,.18)!important}
+.primary:active{transform:scale(.985)}
+.plain{border-radius:15px!important;background:#f2f5fa!important;color:#526078!important}
+.home-v14{padding-top:8px}
+.home-title-v14{font-size:28px!important;letter-spacing:-.5px;color:#152033}
+.home-sub-v14{font-size:14px!important;margin-top:7px!important;margin-bottom:26px!important}
+.subject-card-v14{border:1px solid var(--v15-line)!important;border-radius:22px!important;padding:20px 18px!important;margin:13px 0!important;box-shadow:var(--v15-shadow)!important}
+.subject-card-v14:hover{border-color:#d9e4f8!important}
+.subject-num-v14{width:52px!important;height:52px!important;border-radius:17px!important;background:linear-gradient(145deg,#edf4ff,#e5efff)!important;font-size:16px}
+.subject-info-v14 strong{font-size:19px!important;color:#182236}
+.subject-info-v14 span{font-size:13px!important;color:var(--v15-sub)!important;line-height:1.45}
+.subject-arrow-v14{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:#f5f7fb;font-size:22px!important}
+.section-title-v14{font-size:16px!important;margin-bottom:12px!important}
+.my-study-v14{margin-top:30px!important}
+.study-grid-v14{gap:10px!important}
+.study-grid-v14 button{background:#fff!important;border:1px solid var(--v15-line)!important;border-radius:17px!important;min-height:62px!important;color:#44516a!important;box-shadow:0 4px 15px rgba(31,52,91,.04)}
+.subject-page-v14{padding-top:4px}
+.back-v14{color:#66758d!important;margin-bottom:4px}
+.subject-head-v14{padding:8px 2px 12px}
+.subject-head-v14 h2{font-size:27px!important;letter-spacing:-.4px}
+.subject-head-v14 p{font-size:14px!important;color:var(--v15-sub)!important}
+.path-card-v14{border:1px solid var(--v15-line)!important;border-radius:22px!important;padding:22px 20px!important;box-shadow:var(--v15-shadow)!important}
+.path-card-v14 strong{font-size:18px!important}.path-card-v14 span{color:var(--v15-sub)!important}
+.path-card-v14 b{width:32px;height:32px;display:grid;place-items:center;background:#f5f7fb;border-radius:50%;font-size:21px!important}
+#quiz .card{padding:20px!important;border-radius:22px!important}
+.quiz-top{margin-bottom:4px!important}
+.quiz-top #qweek{font-size:14px!important;color:#66758d!important}
+.focus-v12{color:#66758d!important;padding:8px 10px!important;border-radius:12px!important}
+.focus-v12.on{background:var(--v15-soft)!important;color:var(--v15-blue)!important}
+.qpos-v12{font-size:13px!important;color:#9aa4b5!important;margin-bottom:20px!important}
+#qtext,.q{font-size:18px!important;line-height:1.65!important;font-weight:700!important;color:#172033!important}
+#opts{margin-top:18px!important}
+#opts>*{border-radius:16px!important;border:1px solid var(--v15-line)!important;margin:10px 0!important;padding:15px 14px!important;transition:.12s!important}
+#opts>*:active{transform:scale(.99)}
+#opts>*.sel{border-color:var(--v15-blue)!important;background:var(--v15-soft)!important}
+.analysis{border-radius:16px!important;margin-top:16px!important;padding:16px!important;line-height:1.65!important}
+.submit-v12{margin-top:22px!important}
+.submit-v12 #submit{min-height:54px!important;border-radius:16px!important;font-size:16px!important}
+.nav-v12{border-top:1px solid var(--v15-line);margin-top:12px!important;padding-top:5px}
+.navbtn-v12{color:#69768c!important;border-radius:12px!important}
+nav{background:rgba(255,255,255,.94)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--v15-line)!important}
+input,select{border-radius:14px!important;border:1px solid var(--v15-line)!important;background:#fff!important}
+@media(max-width:640px){
+ body{font-size:14px}
+ main{padding-left:14px!important;padding-right:14px!important}
+ .home-title-v14{font-size:26px!important}
+ .subject-card-v14{padding:18px 15px!important}
+ .subject-num-v14{width:48px!important;height:48px!important}
+ .study-grid-v14 button{min-height:58px!important}
+ #quiz .card{padding:17px!important}
+ #qtext,.q{font-size:17px!important}
+ #opts>*{padding:14px 12px!important}
+}
+
+.navbtn-v12:disabled{opacity:.35!important;cursor:not-allowed!important;pointer-events:none!important}
+
+.subject-head-v14{position:relative}
+.reset-v16{position:absolute;right:0;top:8px;border:1px solid #e2e8f2;background:#fff;color:#66758d;border-radius:13px;padding:9px 12px;font-weight:700}
+.reset-v16:active{transform:scale(.98)}
+
+.home-v14{padding-top:14px!important}.home-hero-v17{padding:8px 2px 16px}.eyebrow-v17{display:inline-block;font-size:12px;font-weight:800;color:#1769ff;background:#eef4ff;border-radius:999px;padding:6px 10px;margin-bottom:10px}.home-hero-v17 h1{margin:0;font-size:26px;line-height:1.25;letter-spacing:-.5px;color:#172033}.home-hero-v17 p{margin:8px 0 0;color:#8791a4;font-size:14px}.subject-card-v14{position:relative;overflow:hidden;min-height:92px!important}.subject-card-v14:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:0 3px 3px 0;background:#1769ff}.subject-num-v14{background:#f0f5ff!important;box-shadow:none!important}.subject-arrow-v14{background:#f6f8fc!important}.section-title-v14{display:flex;align-items:center;gap:8px}.section-title-v14:after{content:"";height:1px;background:#e8edf5;flex:1}
+
+.source-note-v22{margin:18px 2px 2px;padding:12px 14px;border-radius:14px;background:#f7f9fc;color:#7c879b;font-size:12px;line-height:1.55}
 </style></head><body><div class="app"><div class="head"><h1>基金从业刷题</h1></div>
-<main id="home"><div class="hero"><small>2026 科目一 + 科目三</small><strong id="overall">0 / 1600</strong><div class="bar"><i id="overallbar"></i></div><div id="accuracy" style="font-size:12px;margin-top:10px"></div></div><div class="notice">按 2026 年修订考试大纲方向组织训练；V1.1 强化题库结构检查、重点分层和错题优先。题目均为原创模拟练习题，不冒充官方真题。正式考试：单科 100 题、120 分钟、60 分合格。</div><div class="sec">考试科目</div><div class="subjects"><button id="s1btn" class="subject active" onclick="pickSubject('s1')"><b>科目一</b><span>基金基础知识与法律法规</span></button><button id="s3btn" class="subject" onclick="pickSubject('s3')"><b>科目三</b><span>私募股权投资基金基础知识</span></button></div><div class="sec">应试训练</div><div class="grid2"><button class="tile" onclick="startDaily()"><b>今日 50 题</b><span id="dailyText">优先未做题</span></button><button class="tile" onclick="startHot()"><b>高频 · 易错</b><span>重点考点强化</span></button><button class="tile" onclick="startFocus()"><b>我的重点题</b><span id="focusText">0 道重点题</span></button><button class="tile" onclick="startUnseen()"><b>未做题专项</b><span id="unseenText">覆盖全部题库</span></button><button class="tile" onclick="startQuality()"><b>题库质量中心</b><span>章节覆盖 · 重复检测 · 重点分布</span></button><button class="tile" onclick="startMistakeFocus()"><b>错题优先 50</b><span>错题 + 薄弱考点优先</span></button></div><div class="sec">每周学习计划</div><div id="weeks"></div></main>
-<main id="quiz" class="hide"><div class="card"><div class="qmeta"><span id="qpos"></span><span><span id="qweek"></span> <span id="timer" class="timer"></span></span></div><div id="qtags" class="tags"></div><div class="q" id="qtext"></div><div id="opts"></div><div id="analysis" class="analysis hide"></div><div class="actions"><button id="focus" class="plain focus">☆ 标记重点</button><button id="submit" class="primary">提交答案</button></div><div class="actions"><button id="prev" class="plain">上一题</button><button id="next" class="primary">下一题</button></div></div></main>
+<main id="home">
+  <section class="home-v14">
+    <div class="home-hero-v17"><span class="eyebrow-v17">2026 新大纲 · 科一 + 科三</span><h1>选择考试科目</h1><p>按科目进入应试训练与每周学习计划</p></div>
+
+    <div class="subject-card-v14" onclick="openSubjectV14(1)">
+      <div class="subject-num-v14">01</div>
+      <div class="subject-info-v14">
+        <strong>科目一</strong>
+        <span>基金基础知识与法律法规</span>
+      </div>
+      <div class="subject-arrow-v14">›</div>
+    </div>
+
+    <div class="subject-card-v14" onclick="openSubjectV14(3)">
+      <div class="subject-num-v14">03</div>
+      <div class="subject-info-v14">
+        <strong>科目三</strong>
+        <span>私募股权投资基金基础知识</span>
+      </div>
+      <div class="subject-arrow-v14">›</div>
+    </div>
+
+    <div class="source-note-v22">依据中国证券投资基金业协会 2026 年度修订大纲整理 · 题目为原创模拟训练题</div><div class="my-study-v14">
+      <div class="section-title-v14">我的学习</div>
+      <div class="study-grid-v14">
+        <button onclick="openLegacyV14('wrong')">错题本</button>
+        <button onclick="openLegacyV14('focus')">重点收藏</button>
+        <button onclick="openLegacyV14('mock')">模拟考试</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="subjectV14" class="subject-page-v14 hide">
+    <button class="back-v14" onclick="closeSubjectV14()">‹ 返回</button>
+    <div class="subject-head-v14">
+      <div>
+        <h2 id="subjectTitleV14">科目一</h2>
+        <p id="subjectDescV14"></p>
+      </div>
+    </div>
+    <div class="path-card-v14" onclick="openTrainingV14()">
+      <div><strong>应试训练</strong><span>高频题 · 易错题 · 错题强化</span></div><b>›</b>
+    </div>
+    <div class="path-card-v14" onclick="openWeeklyV14()">
+      <div><strong>每周学习计划</strong><span>按 4 周备考节奏系统学习</span></div><b>›</b>
+    </div>
+    <div id="legacyHostV14" class="legacy-host-v14"></div>
+  </section>
+
+  <div id="legacyHomeV14" class="legacy-hidden-v14"><div class="hero"><small>2026 科目一 + 科目三</small><strong id="overall">0 / 1600</strong><div class="bar"><i id="overallbar"></i></div><div id="accuracy" style="font-size:12px;margin-top:10px"></div></div><div class="notice">按 2026 年修订考试大纲方向组织训练；V1.1 强化题库结构检查、重点分层和错题优先。题目均为原创模拟练习题，不冒充官方真题。正式考试：单科 100 题、120 分钟、60 分合格。</div><div class="sec">考试科目</div><div class="subjects"><button id="s1btn" class="subject active" onclick="pickSubject('s1')"><b>科目一</b><span>基金基础知识与法律法规</span></button><button id="s3btn" class="subject" onclick="pickSubject('s3')"><b>科目三</b><span>私募股权投资基金基础知识</span></button></div><div class="sec">应试训练</div><div class="grid2"><button class="tile" onclick="startDaily()"><b>今日 50 题</b><span id="dailyText">优先未做题</span></button><button class="tile" onclick="startHot()"><b>高频 · 易错</b><span>重点考点强化</span></button><button class="tile" onclick="startFocus()"><b>我的重点题</b><span id="focusText">0 道重点题</span></button><button class="tile" onclick="startUnseen()"><b>未做题专项</b><span id="unseenText">覆盖全部题库</span></button><button class="tile" onclick="startQuality()"><b>题库质量中心</b><span>章节覆盖 · 重复检测 · 重点分布</span></button><button class="tile" onclick="startMistakeFocus()"><b>错题优先 50</b><span>错题 + 薄弱考点优先</span></button></div><div class="sec">每周学习计划</div><div id="weeks"></div></div>
+</main>
+<main id="quiz" class="hide"><div class="card"><div class="quiz-top"><div><span id="qweek"></span><span id="timer" class="timer"></span></div><button id="focus" class="focus-v12">☆ 标记重点</button></div><div id="qpos" class="qpos-v12"></div><div id="qtags" class="tags" style="display:none"></div><div class="q" id="qtext"></div><div id="opts"></div><div id="analysis" class="analysis hide"></div><div class="submit-v12"><button id="submit" class="primary">提交答案</button></div><div class="nav-v12"><button id="prev" class="navbtn-v12">‹ 上一题</button><button id="next" class="navbtn-v12">下一题 ›</button></div></div></main>
 <main id="wrong" class="hide"><div class="card"><b>错题本</b><span class="muted">答错自动收录；重刷连续答对 2 次后自动移出。</span><button class="primary full" style="width:100%;margin-top:12px" onclick="startWrong()">开始重刷错题</button></div><div id="wronglist"></div></main>
 <main id="mock" class="hide"><div class="card"><h3 style="margin-top:0">正式模拟考试</h3><div class="muted">100题 · 120分钟 · 60分合格 · 随机组卷</div><div class="grid2" style="margin-top:12px"><button class="tile" onclick="startMock('s1')"><b>科目一模考</b><span>100题</span></button><button class="tile" onclick="startMock('s3')"><b>科目三模考</b><span>100题</span></button></div></div><div class="sec">最近模考</div><div id="history"></div></main>
 <main id="quality" class="hide"><div class="card"><h3 style="margin-top:0">题库质量中心</h3><span class="muted">基于当前原创模拟题库的结构检查；不代表官方真题认证。</span><div id="qualityBody"></div></div><div class="card"><h3 style="margin-top:0">章节覆盖</h3><div id="coverage"></div></div></main><main id="stats" class="hide"><div class="card"><h3 style="margin-top:0">学习统计</h3><div id="statbody"></div></div><div class="card"><h3 style="margin-top:0">薄弱知识点 TOP 5</h3><div id="weak"></div></div></main></div>
-<nav class="tabs"><button class="on" onclick="go('home',this)">首页</button><button onclick="startRandom()">随机</button><button onclick="go('wrong',this)">错题</button><button onclick="go('mock',this)">模考</button><button onclick="go('stats',this)">统计</button></nav><script src="./questions.js?v=113"></script><script>
+<nav class="tabs"><button class="on" onclick="go('home',this)">首页</button><button onclick="startRandom()">随机</button><button onclick="go('wrong',this)">错题</button><button onclick="go('mock',this)">模考</button><button onclick="go('stats',this)">统计</button></nav><script src="./questions.js?v=220"></script><script>
 const $ = (id) => document.getElementById(id);
 const overall=$('overall'), overallbar=$('overallbar'), accuracy=$('accuracy'),
 dailyText=$('dailyText'), focusText=$('focusText'), unseenText=$('unseenText'),
@@ -30,10 +221,10 @@ function startWeek(w){startSet(bank.filter(q=>q.subject===sub&&q.week===w))}func
 function startMock(s){sub=s;startSet(shuffle(bank.filter(q=>q.subject===s)).slice(0,100),'mock');endAt=Date.now()+120*60*1000;startTimer()}
 function startTimer(){clearInterval(timerInt);timerInt=setInterval(()=>{let d=Math.max(0,endAt-Date.now()),m=Math.floor(d/60000),ss=Math.floor(d%60000/1000);timer.textContent=`${m}:${String(ss).padStart(2,'0')}`;if(!d)finishMock()},1000)}
 function openQuiz(){go('quiz');renderQ();if(mode==='mock')startTimer()}
-function renderQ(){done=false;sel=null;let q=session[idx];qpos.textContent=`${idx+1} / ${session.length}`;qweek.textContent=(q.subject==='s1'?'科目一':'科目三')+' · 第'+q.week+'周';qtags.innerHTML=`<span class="tag ${q.priority==='重点'?'hot':''}">${q.type}</span><span class="tag">${q.keypoint}</span>`;qtext.textContent=q.title;opts.innerHTML=q.options.map((o,i)=>`<button class="opt" onclick="choose(${i})"><b>${'ABCD'[i]}.</b> ${o}</button>`).join('');analysis.classList.add('hide');submit.classList.remove('hide');prev.disabled=idx===0;prev.style.opacity=idx===0?'.45':'1';next.textContent=idx===session.length-1?'完成':'下一题';focus.textContent=S.focus[q.id]?'★ 已标重点':'☆ 标记重点';focus.classList.toggle('on',!!S.focus[q.id])}
+function renderQ(){done=false;sel=null;let q=session[idx];qpos.textContent=`${idx+1} / ${session.length}`;qweek.textContent=(q.subject==='s1'?'科目一':'科目三')+' · 第'+q.week+'周';qtags.innerHTML=`<span class="tag ${q.priority==='重点'?'hot':''}">${q.type}</span><span class="tag">${q.keypoint}</span>`;qtext.textContent=q.title;opts.innerHTML=q.options.map((o,i)=>`<button class="opt" onclick="choose(${i})"><b>${'ABCD'[i]}.</b> ${o}</button>`).join('');analysis.classList.add('hide');submit.classList.remove('hide');prev.disabled=idx===0;prev.style.opacity=idx===0?'.45':'1';next.disabled=true;next.textContent=idx===session.length-1?'完成':'下一题';focus.textContent=S.focus[q.id]?'★ 已标重点':'☆ 标记重点';focus.classList.toggle('on',!!S.focus[q.id])}
 function choose(i){if(done)return;sel=i;[...opts.children].forEach((x,j)=>x.classList.toggle('sel',j===i))}
-submit.onclick=()=>{if(sel===null)return alert('请先选择答案');let q=session[idx],ok=sel===q.answer;done=true;S.attempts++;S.answered[q.id]=1;S.byKey[q.keypoint]=S.byKey[q.keypoint]||{a:0,c:0,subject:q.subject};S.byKey[q.keypoint].a++;if(ok){S.correct++;S.byKey[q.keypoint].c++;if(mode==='mock')mockCorrect++;if(S.wrong[q.id]){S.wrongMastery[q.id]=(S.wrongMastery[q.id]||0)+1;if(S.wrongMastery[q.id]>=2){delete S.wrong[q.id];delete S.wrongMastery[q.id]}}}else{S.wrong[q.id]=1;S.wrongMastery[q.id]=0}if(mode==='daily'){dailyReset();S.daily.count++}save();[...opts.children].forEach((x,j)=>{x.classList.remove('sel');if(j===q.answer)x.classList.add('ok');else if(j===sel)x.classList.add('bad')});analysis.innerHTML=`<b>${ok?'回答正确':'回答错误'}</b><br>正确答案：${'ABCD'[q.answer]}<br><b>考点：</b>${q.keypoint}<br><b>解析：</b>${q.explain}${!ok?'<br><b>已自动加入错题本</b>':''}`;analysis.classList.remove('hide');submit.classList.add('hide');if(ok){setTimeout(()=>{if(idx<session.length-1){idx++;renderQ()}else if(mode==='mock'){finishMock()}else{alert('本组练习完成');go('home')}},420)}}
-prev.onclick=()=>{if(idx>0){idx--;renderQ()}};next.onclick=()=>{if(idx<session.length-1){idx++;renderQ()}else mode==='mock'?finishMock():(alert('本组练习完成'),go('home'))};focus.onclick=()=>{let q=session[idx];S.focus[q.id]?delete S.focus[q.id]:S.focus[q.id]=1;save();focus.textContent=S.focus[q.id]?'★ 已标重点':'☆ 标记重点';focus.classList.toggle('on',!!S.focus[q.id])}
+submit.onclick=()=>{if(sel===null)return alert('请先选择答案');let q=session[idx],ok=sel===q.answer;done=true;S.attempts++;S.answered[q.id]=1;S.byKey[q.keypoint]=S.byKey[q.keypoint]||{a:0,c:0,subject:q.subject};S.byKey[q.keypoint].a++;if(ok){S.correct++;S.byKey[q.keypoint].c++;if(mode==='mock')mockCorrect++;if(S.wrong[q.id]){S.wrongMastery[q.id]=(S.wrongMastery[q.id]||0)+1;if(S.wrongMastery[q.id]>=2){delete S.wrong[q.id];delete S.wrongMastery[q.id]}}}else{S.wrong[q.id]=1;S.wrongMastery[q.id]=0}if(mode==='daily'){dailyReset();S.daily.count++}save();[...opts.children].forEach((x,j)=>{x.classList.remove('sel');if(j===q.answer)x.classList.add('ok');else if(j===sel)x.classList.add('bad')});analysis.innerHTML=`<b>${ok?'回答正确':'回答错误'}</b><br>正确答案：${'ABCD'[q.answer]}<br><b>考点：</b>${q.keypoint}<br><b>解析：</b>${q.explain}${!ok?'<br><b>已自动加入错题本</b>':''}`;analysis.classList.remove('hide');submit.classList.add('hide');next.disabled=false;if(ok){setTimeout(()=>{if(idx<session.length-1){idx++;renderQ()}else if(mode==='mock'){finishMock()}else{alert('本组练习完成');go('home')}},420)}}
+prev.onclick=()=>{if(idx>0){idx--;renderQ()}};next.onclick=()=>{if(next.disabled)return;if(idx<session.length-1){idx++;renderQ()}else mode==='mock'?finishMock():(alert('本组练习完成'),go('home'))};focus.onclick=()=>{let q=session[idx];S.focus[q.id]?delete S.focus[q.id]:S.focus[q.id]=1;save();focus.textContent=S.focus[q.id]?'★ 已标重点':'☆ 标记重点';focus.classList.toggle('on',!!S.focus[q.id])}
 function finishMock(){clearInterval(timerInt);if(mode!=='mock')return;let score=mockCorrect;S.history.unshift({date:new Date().toLocaleString(),subject:(session[0]&&session[0].subject)||sub,score});S.history=S.history.slice(0,20);save();mode='done';alert(`模拟考试结束：${score}分 · ${score>=60?'合格':'未合格'}`);go('mock')}
 function renderWrong(){let a=bank.filter(q=>q.subject===sub&&S.wrong[q.id]);wronglist.innerHTML=a.length?a.slice(0,100).map(q=>`<div class="card"><b>${q.title}</b><div class="muted">${q.keypoint} · ${q.type} · 掌握 ${S.wrongMastery[q.id]||0}/2</div></div>`).join(''):'<div class="empty">当前科目暂无错题</div>'}
 function renderMock(){history.innerHTML=S.history.length?S.history.map(h=>`<div class="card"><div class="weekTop"><div><b>${h.subject==='s1'?'科目一':'科目三'}</b><span class="muted">${h.date}</span></div><div class="score ${h.score>=60?'oktxt':'danger'}">${h.score}</div></div></div>`).join(''):'<div class="empty">还没有模考记录</div>'}
@@ -46,4 +237,144 @@ if('serviceWorker'in navigator){
   navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister()})}).catch(function(){});
 }
 if(window.caches&&caches.keys){caches.keys().then(function(keys){keys.forEach(function(k){caches.delete(k)})}).catch(function(){});}
-</script></body></html>
+</script>
+<script>
+var currentSubjectV14=1;
+function openSubjectV14(n){
+  currentSubjectV14=n;
+  document.querySelector('.home-v14').classList.add('hide');
+  document.getElementById('subjectV14').classList.remove('hide');
+  document.getElementById('subjectTitleV14').textContent=n===1?'科目一':'科目三';
+  document.getElementById('subjectDescV14').textContent=n===1?'基金基础知识与法律法规':'私募股权投资基金基础知识';
+}
+function closeSubjectV14(){
+  document.getElementById('subjectV14').classList.add('hide');
+  document.querySelector('.home-v14').classList.remove('hide');
+  document.getElementById('legacyHostV14').innerHTML='';
+}
+function legacyButtonsV14(){
+  return Array.from(document.querySelectorAll('#legacyHomeV14 button'));
+}
+function clickByTextV14(words){
+  var bs=legacyButtonsV14();
+  var b=bs.find(function(x){return words.some(function(w){return (x.textContent||'').indexOf(w)>=0})});
+  if(b){ b.click(); return true; }
+  return false;
+}
+function setSubjectLegacyV14(){
+  var target=currentSubjectV14===1?'科目一':'科目三';
+  clickByTextV14([target]);
+}
+function openTrainingV14(){
+  setSubjectLegacyV14();
+  if(!clickByTextV14(['每日50','今日50','高频','应试训练'])) alert('请选择下方训练入口开始刷题');
+}
+function openWeeklyV14(){
+  setSubjectLegacyV14();
+  if(!clickByTextV14(['第1周','Week 1','每周','周学习'])) alert('请选择每周学习计划开始刷题');
+}
+function openLegacyV14(type){
+  var map={wrong:['错题'],focus:['重点','收藏'],mock:['模拟']};
+  if(!clickByTextV14(map[type])) alert('该入口暂未找到');
+}
+</script>
+
+
+
+
+
+<script>
+/* V2.0 stable state layer: one persistent source of truth = fund_v1 */
+S.answerState=S.answerState||{};
+save();
+
+var coreChooseV20=choose;
+choose=function(i){
+  coreChooseV20(i);
+  var q=session&&session[idx];
+  if(q){
+    S.answerState[q.id]=S.answerState[q.id]||{};
+    S.answerState[q.id].selected=i;
+    save();
+  }
+};
+
+var coreRenderV20=renderQ;
+renderQ=function(){
+  coreRenderV20();
+  var q=session&&session[idx],st=q&&S.answerState[q.id];
+  if(!q||!st)return;
+  if(typeof st.selected==='number'){
+    sel=st.selected;
+    Array.from(opts.children).forEach(function(x,j){x.classList.toggle('sel',j===sel)});
+  }
+  if(st.submitted){
+    done=true;
+    Array.from(opts.children).forEach(function(x,j){
+      x.classList.remove('sel','ok','bad');
+      if(j===st.selected)x.classList.add('sel');
+      if(j===q.answer)x.classList.add('ok');
+      if(j===st.selected&&st.selected!==q.answer)x.classList.add('bad');
+    });
+    analysis.innerHTML=st.analysisHTML||'';
+    analysis.classList.remove('hide');
+    submit.classList.add('hide');
+    submit.disabled=true;
+    next.disabled=false;
+  }
+};
+
+var coreSubmitV20=submit.onclick;
+submit.onclick=function(){
+  if(sel===null)return alert('请先选择答案');
+  var q=session[idx],selected=sel;
+  var result=coreSubmitV20.apply(this,arguments);
+  S.answerState[q.id]={
+    selected:selected,
+    submitted:true,
+    correct:selected===q.answer,
+    analysisHTML:analysis.innerHTML,
+    answeredAt:Date.now()
+  };
+  save();
+  return result;
+};
+
+function resetSubjectV20(){
+  var subject=currentSubjectV14===1?'s1':'s3';
+  var name=currentSubjectV14===1?'科目一':'科目三';
+  if(!confirm('确定重置'+name+'的答题记录吗？\\n\\n练习进度、错题、答题状态和本科统计将清空；重点收藏保留。'))return;
+  var ids={};
+  bank.filter(function(q){return q.subject===subject}).forEach(function(q){ids[q.id]=1});
+  Object.keys(ids).forEach(function(id){
+    delete S.answered[id];
+    delete S.wrong[id];
+    delete S.wrongMastery[id];
+    delete S.answerState[id];
+  });
+  Object.keys(S.byKey||{}).forEach(function(k){
+    if(S.byKey[k]&&S.byKey[k].subject===subject)delete S.byKey[k];
+  });
+  S.history=(S.history||[]).filter(function(x){return x.subject!==subject});
+  /* Recalculate global totals from retained submitted answer states. */
+  var states=Object.values(S.answerState||{}).filter(function(x){return x&&x.submitted});
+  S.attempts=states.length;
+  S.correct=states.filter(function(x){return x.correct}).length;
+  S.daily={date:'',count:0};
+  save();
+  alert(name+'答题记录已重置');
+  location.reload();
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var old=document.getElementById('resetSubjectV16');
+  if(old)old.remove();
+  var head=document.querySelector('.subject-head-v14');
+  if(head&&!document.getElementById('resetSubjectV20')){
+    var b=document.createElement('button');
+    b.id='resetSubjectV20'; b.className='reset-v16';
+    b.textContent='重置答题'; b.onclick=resetSubjectV20; head.appendChild(b);
+  }
+});
+</script>
+</body></html>
